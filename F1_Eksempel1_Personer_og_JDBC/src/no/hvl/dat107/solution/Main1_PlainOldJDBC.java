@@ -25,13 +25,13 @@ public class Main1_PlainOldJDBC {
 	public static void main(String[] args) {
 
 		String sql = "SELECT id, navn FROM forelesning1.person";
-		
+
 		Connection conn = null;
 		Statement stmt = null;
 
 		try {
 			Class.forName(JDBC_DRIVER);
-			
+
 			System.out.println("Connecting to database...");
 			conn = DriverManager.getConnection(DB_URL, USER, PASS);
 

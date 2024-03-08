@@ -1,7 +1,6 @@
 package no.hvl.dat107.solution;
 
 import java.util.List;
-import java.util.Map;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
