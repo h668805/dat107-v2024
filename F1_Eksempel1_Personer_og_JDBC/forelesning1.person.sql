@@ -26,7 +26,3 @@ VALUES
     (1003, 'Donald Duck');
 
 select * from person;
-
-
-
-

@@ -10,17 +10,17 @@ public class Main3_FindPersonById {
 
 	static final String JDBC_DRIVER = "org.postgresql.Driver";
 
-	static final String DB_URL = "jdbc:postgresql://localhost:5432/dat107v24";
-	static final String USER = "postgres";
-	static final String PASS = Passwords.LOCALHOST_PASSWORD;
+//	static final String DB_URL = "jdbc:postgresql://localhost:5432/dat107v24";
+//	static final String USER = "postgres";
+//	static final String PASS = Passwords.LOCALHOST_PASSWORD;
 
 //	static final String DB_URL = "jdbc:postgresql://ider-database.westeurope.cloudapp.azure.com:5432/lph";
 //	static final String USER = "lph";
 //	static final String PASS = Passwords.AZURE_PASSWORD;
 	
-//	static final String DB_URL = "jdbc:postgresql://129.151.221.119:5432/lph";
-//	static final String USER = "lph";
-//	static final String PASS = Passwords.DAT107_HVL_PASSWORD;
+	static final String DB_URL = "jdbc:postgresql://129.151.221.119:5432/668805";
+	static final String USER = "668805";
+	static final String PASS = "IDKDude12.";
 
 	public static void main(String[] args) throws ClassNotFoundException {
 

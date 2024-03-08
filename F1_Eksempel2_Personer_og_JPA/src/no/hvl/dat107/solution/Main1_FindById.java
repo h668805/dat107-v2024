@@ -11,7 +11,7 @@ public class Main1_FindById {
 	private static EntityManagerFactory emf;
 	static {
 		emf = Persistence.createEntityManagerFactory("personPersistenceUnit", 
-				Map.of("jakarta.persistence.jdbc.password", Passwords.LOCALHOST_PASSWORD));
+				Map.of("jakarta.persistence.jdbc.password", "IDKDude12."));
 	}
 	
 	/* ------------------------------------------------------------------- */
