@@ -1,7 +1,14 @@
 package no.hvl.dat107;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(schema = "forelesning2_todo")
 public class Todo {
 	
+	@Id
 	private int id;
 	private String tekst;
 	

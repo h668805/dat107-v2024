@@ -1,5 +1,6 @@
 package no.hvl.dat107;
 
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -23,8 +24,13 @@ public class Main {
 		 *  3, 'Ta ut bosset'
 		 */
 
-		// a) Hente ut alle todos 
+		// a) Hente ut alle todos
+		List<Todo> alle = todoDAO.finnAlleTodos();
+		System.out.println(alle);
+		
 		// b) Hente ut todo med pk=2
+//		todoDAO.finnTodoMedPk(2);
+		
 		// c.i)   Hente ut SINGLE todo med tekst="Handle mat" 
 		// c.ii)  Hente ut SINGLE todo med tekst="Vaske bilen" (som ikke finnes) 
 		// c.iii) Hente ut LISTE av todos med tekst="Handle mat" 

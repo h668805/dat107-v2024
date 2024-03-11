@@ -24,4 +24,3 @@ VALUES
     (3, 'Ta ut bosset');
 
 SELECT * FROM todo;
-    
