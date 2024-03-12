@@ -7,6 +7,7 @@
 	<persistence-unit name="todoPersistenceUnit" transaction-type="RESOURCE_LOCAL">
 	
 		<class>no.hvl.dat107.Todo</class>
+		
 		<properties>
 		    <!--  Generelle JPA properties -->
 			<property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>

@@ -21,7 +21,7 @@ public class TodoDAO {
 		
 		try {
 			String p = "select t from Todo t";
-			return em.createNamedQuery(p, Todo.class).getResultList();
+			return em.createQuery(p, Todo.class).getResultList();
 //			return query.getResultList();
 
 		} finally {
@@ -31,14 +31,12 @@ public class TodoDAO {
 
 	/* --------------------------------------------------------------------- */
 
-	public List<Todo> finnTodoMedPk(int pk) {
+	public Todo finnTodoMedId(int id) {
 		
 		EntityManager em = emf.createEntityManager();
 
 		try {
-			String p = "SELECT t from Todo t WHERE t.id = " + pk;
-			TypedQuery<Todo> query = em.createNamedQuery(p, Todo.class);
-			return query.getResultList();
+			return em.find(Todo.class, id);
 			
 		} finally {
 			em.close();
@@ -51,7 +49,7 @@ public class TodoDAO {
 		EntityManager em = emf.createEntityManager();
 		
 		try {
-			return em.find(Todo.class, str);
+			return finnTodosMedTekst(str).get(0);
 		} finally {
 			em.close();
 		}
@@ -64,7 +62,7 @@ public class TodoDAO {
 		
 		try {
 			String p = "SELECT t from Todo t WHERE t.tekst = " + str;
-			return em.createNamedQuery(p, Todo.class).getResultList();
+			return em.createQuery(p, Todo.class).getResultList();
 		} finally {
 			em.close();
 		}

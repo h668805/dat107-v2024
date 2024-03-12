@@ -15,8 +15,7 @@ public class PersonCRUDmedJPA implements PersonCRUD {
 	
 	/* Konstruktør */
 	public PersonCRUDmedJPA() {
-		emf = Persistence.createEntityManagerFactory("personPersistenceUnit", 
-				Map.of("jakarta.persistence.jdbc.password", Passwords.DAT107_DB_PASSWORD));
+		emf = Persistence.createEntityManagerFactory("personPersistenceUnit");
 	}
 	
 	@Override
@@ -29,7 +28,6 @@ public class PersonCRUDmedJPA implements PersonCRUD {
 			tx.begin();
 			em.persist(p); //Oppretter en ny rad i databasen
 			tx.commit();
-		
 		} catch (Throwable e) {
 			e.printStackTrace();
 			tx.rollback();

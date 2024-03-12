@@ -12,8 +12,7 @@ import jakarta.persistence.TypedQuery;
 public class TodoDAO {
 	
 	private EntityManagerFactory emf 
-			= Persistence.createEntityManagerFactory("todoPersistenceUnit", 
-			Map.of("jakarta.persistence.jdbc.password", Passwords.DAT107_DB_PASSWORD));
+			= Persistence.createEntityManagerFactory("todoPersistenceUnit");
 	
 	/* --------------------------------------------------------------------- */
 
