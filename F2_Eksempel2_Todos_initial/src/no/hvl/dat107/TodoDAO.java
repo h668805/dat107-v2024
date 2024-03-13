@@ -9,20 +9,18 @@ import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
 
 public class TodoDAO {
-	
-	private EntityManagerFactory emf 
-			= Persistence.createEntityManagerFactory("todoPersistenceUnit");
-	
+
+	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("todoPersistenceUnit");
+
 	/* --------------------------------------------------------------------- */
 
 	public List<Todo> finnAlleTodos() {
-		
+
 		EntityManager em = emf.createEntityManager();
-		
+
 		try {
 			String p = "select t from Todo t";
 			return em.createQuery(p, Todo.class).getResultList();
-//			return query.getResultList();
 
 		} finally {
 			em.close();
@@ -32,12 +30,12 @@ public class TodoDAO {
 	/* --------------------------------------------------------------------- */
 
 	public Todo finnTodoMedId(int id) {
-		
+
 		EntityManager em = emf.createEntityManager();
 
 		try {
 			return em.find(Todo.class, id);
-			
+
 		} finally {
 			em.close();
 		}
@@ -47,22 +45,25 @@ public class TodoDAO {
 
 	public Todo finnTodoMedTekst(String str) {
 		EntityManager em = emf.createEntityManager();
-		
+
 		try {
-			return finnTodosMedTekst(str).get(0);
+			List<Todo> liste = finnTodosMedTekst(str);
+			return liste.isEmpty() ? null : liste.getFirst();
 		} finally {
 			em.close();
 		}
 	}
-	
+
 	/* --------------------------------------------------------------------- */
 
-	public List<Todo>  finnTodosMedTekst(String str) {
+	public List<Todo> finnTodosMedTekst(String str) {
 		EntityManager em = emf.createEntityManager();
-		
+
 		try {
-			String p = "SELECT t from Todo t WHERE t.tekst = " + str;
-			return em.createQuery(p, Todo.class).getResultList();
+			String p = "SELECT t from Todo t WHERE t.tekst like :str";
+			TypedQuery<Todo> query = em.createQuery(p, Todo.class);
+			query.setParameter("str", str);
+			return query.getResultList();
 		} finally {
 			em.close();
 		}
@@ -71,15 +72,15 @@ public class TodoDAO {
 	/* --------------------------------------------------------------------- */
 
 	public boolean lagreNyTodo(Todo todo) {
-		
+
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		boolean lagtTil = false;
 		try {
 			tx.begin();
-			
+
 			em.persist(todo);
-			
+
 			tx.commit();
 			lagtTil = true;
 		} catch (Throwable e) {
@@ -90,26 +91,25 @@ public class TodoDAO {
 		} finally {
 			em.close();
 		}
-		
-		return lagtTil; 
+
+		return lagtTil;
 	}
 
 	/* --------------------------------------------------------------------- */
 
-	public Todo slettTodoMedPk(int pk) {
-		
+	public Todo slettTodoMedId(int id) {
+
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
-		Todo slettet = null;
+		Todo todo = null;
 
 		try {
 			tx.begin();
-			String p = "SELECT t from Todo t WHERE t.id = " + pk;
-			Todo todo = em.find(Todo.class, p);
-			em.remove(todo);
-			
+			todo = em.find(Todo.class, id);
+			if (todo != null)
+				em.remove(todo);
 			tx.commit();
-			slettet = todo;
+
 		} catch (Throwable e) {
 			e.printStackTrace();
 			if (tx.isActive()) {
@@ -118,22 +118,22 @@ public class TodoDAO {
 		} finally {
 			em.close();
 		}
-		
-		return slettet; 
+
+		return todo;
 	}
 
 	/* --------------------------------------------------------------------- */
 
 	public Todo oppdaterTodo(Todo todo) {
-		
+
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		Todo merge = null;
 		try {
 			tx.begin();
-			
+
 			em.merge(todo);
-			
+
 			tx.commit();
 			merge = todo;
 		} catch (Throwable e) {
@@ -144,23 +144,23 @@ public class TodoDAO {
 		} finally {
 			em.close();
 		}
-		
-		return merge; 
+
+		return merge;
 	}
 
 	/* --------------------------------------------------------------------- */
 
 	public Todo oppdaterTekst(int id, String tekst) {
-		
+
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		Todo merge = null;
 
 		try {
 			tx.begin();
-			
+
 			em.merge(new Todo(id, tekst));
-			
+
 			tx.commit();
 			merge = new Todo(id, tekst);
 		} catch (Throwable e) {
@@ -171,7 +171,7 @@ public class TodoDAO {
 		} finally {
 			em.close();
 		}
-		
-		return merge; 
+
+		return merge;
 	}
 }

@@ -15,8 +15,7 @@
 			<property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://129.151.221.119:5432/lph"/>
 			<property name="jakarta.persistence.jdbc.user" value="lph"/>
 			
-			<!-- Passordet blir satt i Java-koden i stedet 
-			<property name="jakarta.persistence.jdbc.password" value=""/>  -->
+			<property name="jakarta.persistence.jdbc.password" value="IDKDude12."/>
 			
 			<!--  EclipseLink properties -->
             <!--  Se https://wiki.eclipse.org/EclipseLink/Examples/JPA/Logging -->

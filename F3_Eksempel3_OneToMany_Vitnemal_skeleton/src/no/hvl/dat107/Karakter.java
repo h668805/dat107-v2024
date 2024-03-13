@@ -3,6 +3,8 @@ package no.hvl.dat107;
 import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -10,8 +12,10 @@ import jakarta.persistence.Table;
 @Table(schema = "forelesning3_one2many")
 public class Karakter {
 	
-	@Id	//autogenerert ... ?
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int karNr;
+	
 	private String emnekode;
 	private LocalDate eksdato;
 	private String bokstav;
