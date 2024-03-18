@@ -48,7 +48,7 @@ public class TodoDAO {
 
 		try {
 			List<Todo> liste = finnTodosMedTekst(str);
-			return liste.isEmpty() ? null : liste.getFirst();
+			return liste.isEmpty() ? null : liste.get(0);
 		} finally {
 			em.close();
 		}
@@ -64,6 +64,7 @@ public class TodoDAO {
 			TypedQuery<Todo> query = em.createQuery(p, Todo.class);
 			query.setParameter("str", str);
 			return query.getResultList();
+			
 		} finally {
 			em.close();
 		}
@@ -71,43 +72,39 @@ public class TodoDAO {
 
 	/* --------------------------------------------------------------------- */
 
-	public boolean lagreNyTodo(Todo todo) {
+	public void lagreNyTodo(Todo todo) {
 
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
-		boolean lagtTil = false;
+
 		try {
 			tx.begin();
-
 			em.persist(todo);
-
 			tx.commit();
-			lagtTil = true;
+
 		} catch (Throwable e) {
 			e.printStackTrace();
+
 			if (tx.isActive()) {
 				tx.rollback();
 			}
+
 		} finally {
 			em.close();
 		}
 
-		return lagtTil;
 	}
 
 	/* --------------------------------------------------------------------- */
 
-	public Todo slettTodoMedId(int id) {
+	public void slettTodoMedId(int id) {
 
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
-		Todo todo = null;
 
 		try {
 			tx.begin();
-			todo = em.find(Todo.class, id);
-			if (todo != null)
-				em.remove(todo);
+			em.remove(em.find(Todo.class, id));
 			tx.commit();
 
 		} catch (Throwable e) {
@@ -115,56 +112,50 @@ public class TodoDAO {
 			if (tx.isActive()) {
 				tx.rollback();
 			}
+
 		} finally {
 			em.close();
 		}
-
-		return todo;
 	}
 
 	/* --------------------------------------------------------------------- */
 
-	public Todo oppdaterTodo(Todo todo) {
+	public void oppdaterTodo(Todo todo) {
 
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
-		Todo merge = null;
+
 		try {
 			tx.begin();
-
 			em.merge(todo);
-
 			tx.commit();
-			merge = todo;
+
 		} catch (Throwable e) {
 			e.printStackTrace();
+
 			if (tx.isActive()) {
 				tx.rollback();
 			}
 		} finally {
 			em.close();
 		}
-
-		return merge;
 	}
 
 	/* --------------------------------------------------------------------- */
 
-	public Todo oppdaterTekst(int id, String tekst) {
+	public void oppdaterTekst(int id, String tekst) {
 
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
-		Todo merge = null;
 
 		try {
 			tx.begin();
-
-			em.merge(new Todo(id, tekst));
-
+			em.find(Todo.class, id).setTekst(tekst);
 			tx.commit();
-			merge = new Todo(id, tekst);
+
 		} catch (Throwable e) {
 			e.printStackTrace();
+
 			if (tx.isActive()) {
 				tx.rollback();
 			}
@@ -172,6 +163,5 @@ public class TodoDAO {
 			em.close();
 		}
 
-		return merge;
 	}
 }

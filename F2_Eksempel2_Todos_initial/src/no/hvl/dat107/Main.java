@@ -1,8 +1,5 @@
 package no.hvl.dat107;
 
-import java.util.Scanner;
-
-
 public class Main {
 
 	//-------------------------------------------------------------------------
@@ -24,33 +21,33 @@ public class Main {
 		 */
 
 		// a) Hente ut alle todos
-		System.out.println(todoDAO.finnAlleTodos());
+		System.out.println(todoDAO.finnAlleTodos() + "\n");
 		
 		// b) Hente ut todo med pk=2
-		System.out.println(todoDAO.finnTodoMedId(2));
+		System.out.println("id = 2: " + todoDAO.finnTodoMedId(2) + "\n");
 		
 		// c.i)   Hente ut SINGLE todo med tekst="Handle mat"
-		System.out.println(todoDAO.finnTodoMedTekst("Handle mat"));
+		System.out.println("tekst = Handle mat: " + todoDAO.finnTodoMedTekst("Handle mat") + "\n");
 		
 		// c.ii)  Hente ut SINGLE todo med tekst="Vaske bilen" (som ikke finnes) 
-		System.out.println(todoDAO.finnTodoMedTekst("Vaske bilen"));
+		System.out.println("tekst = Vaske bilen: " + todoDAO.finnTodoMedTekst("Vaske bilen") + "\n");
 		
 		// c.iii) Hente ut LISTE av todos med tekst="Handle mat" 
-		System.out.println(todoDAO.finnTodosMedTekst("Handle mat"));
+		System.out.println("tekst = Handle mat: " + todoDAO.finnTodosMedTekst("Handle mat") + "\n");
 		
 		// c.iv)  Hente ut LISTE av todos med tekst="Vaske bilen" (som ikke finnes)
-		System.out.println(todoDAO.finnTodosMedTekst("Vaske bilen"));
+		System.out.println("tekst = Vaske bilen: " + todoDAO.finnTodosMedTekst("Vaske bilen") + "\n");
 		
 		// d) Legge til en ny todo med pk=4
-		System.out.println(todoDAO.lagreNyTodo(new Todo(4, "Støvsuge")));
+		System.out.println("Lagre ny Todo: " + todoDAO.lagreNyTodo(new Todo(4, "Støvsuge")) + "\n");
 		
 		// e) Slette todo med pk=4
-		System.out.println(todoDAO.slettTodoMedId(4));
+		System.out.println("Slett Todo: " + todoDAO.slettTodoMedId(4) + "\n");
 		
 		// f) Endre tekst på todo med pk=3
-		System.out.println(todoDAO.oppdaterTekst(3, "Vaske kjøkken"));
+		System.out.println("Oppdater tekst: " + todoDAO.oppdaterTekst(3, "Vaske kjøkken") + "\n");
 		
 		// g) Endre tekst på todo med pk=3, alternativ måte
-		System.out.println(todoDAO.oppdaterTodo(new Todo(3, "Kjøkken")));
+		System.out.println("Endre tekst: " + todoDAO.oppdaterTodo(new Todo(3, "Kjøkken")) + "\n");
 	}
 }
