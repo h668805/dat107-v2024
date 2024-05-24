@@ -52,5 +52,3 @@ public class Todoliste {
 		return "Todoliste [id=" + id + ", navn=" + navn + ", todos=" + todos + "]";
 	}
 }
-
-

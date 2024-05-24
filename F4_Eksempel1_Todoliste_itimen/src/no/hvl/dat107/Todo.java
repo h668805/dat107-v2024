@@ -14,33 +14,34 @@ import jakarta.persistence.Table;
 @Table(schema = "forelesning4_todoliste")
 public class Todo {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String tekst;
-    
-    @ManyToOne
-    @JoinColumn(name="listeid")
-    private Todoliste liste;
-    
-    public Todo() {}
-    
-    public Todo(String tekst) {
-        this.tekst = tekst;
-    }
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	private String tekst;
+
+	@ManyToOne
+	@JoinColumn(name = "listeid")
+	private Todoliste liste;
+
+	public Todo() {
+	}
+
+	public Todo(String tekst) {
+		this.tekst = tekst;
+	}
 
 	public void setTekst(String tekst) {
 		this.tekst = tekst;
 	}
-	
-    public void setListe(Todoliste liste) {
+
+	public void setListe(Todoliste liste) {
 		this.liste = liste;
 	}
 
 	@Override
-    public String toString() {
-        return tekst;
-    }
+	public String toString() {
+		return tekst;
+	}
 
 	@Override
 	public int hashCode() {
@@ -58,6 +59,4 @@ public class Todo {
 		Todo other = (Todo) obj;
 		return id == other.id;
 	}
-	
-	
 }
